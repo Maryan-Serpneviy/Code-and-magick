@@ -48,23 +48,35 @@ window.renderStatistics = function (ctx, players, times) {
     renderCloud(ctx, CX1 + GAP, CX2 + GAP, CX3 + GAP, CY + GAP, CR, 'rgba(0, 0, 0, 0.3)');
     renderCloud(ctx, CX1, CX2, CX3, CY, CR, 'white');
 
-    ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.fillText('Ура, вы победили!', 155, 55);
     ctx.fillText('Список результатов:', 360, 55);
 
-    var maxTime = getMaxElement(times);
-
+    var maxTime = Math.floor(getMaxElement(times));
+    var winCoef;
     for (var i = 0; i < players.length; i++) {
+
+        // different saturations of blue for other players
+        var sat = parseInt(Math.random() * 100);
+        var colorSat = 'hsl(240, ' + sat + '%, 50%)';
+
+        // mixes of blue and random red for you
+        var randomR = parseInt(Math.random() * 255);
+        winCoef = times[i] / maxTime; // the more points player has the more pink bar is
+        var colorRB = 'rgb(' + Math.floor(255 * winCoef) + ', 0, 255, 1)';
+
+        // bars heights and gaps calculating
+        var formula = BAR_HEIGHT * times[i] / maxTime;
+
+        ctx.fillStyle = '#000';
+        ctx.fillText(Math.floor(times[i]), STAT_X + NAME_GAP * i, STAT_Y + (BAR_HEIGHT - formula));
+        ctx.fillText(players[i], NAME_X + NAME_GAP * i, NAME_Y);
+        // your color is red, other players' color is variable
         if (players[i] === 'Вы') {
             ctx.fillStyle = 'rgba(255, 0, 0, 1)';
         } else {
-            ctx.fillStyle = 'blue';
+            ctx.fillStyle = colorRB;
         }
-        var formula = BAR_HEIGHT * times[i] / maxTime;
-        ctx.fillText(Math.floor(times[i]), STAT_X + NAME_GAP * i, STAT_Y + (BAR_HEIGHT - formula));
-        ctx.fillText(players[i], NAME_X + NAME_GAP * i, NAME_Y);
         ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y + (BAR_HEIGHT - formula), BAR_WIDTH, formula);
-
     }
 };
