@@ -10,13 +10,15 @@ var FONT_GAP = 15;
 var TEXT_WIDTH = 50;
 
 var BAR_HEIGHT = 150 - 10;
-var BAR_WIDTH = 50;
+var BAR_WIDTH = 50; // 40
 var BAR_X = 160;
 var BAR_Y = 80 + 10;
 var BAR_GAP = 110;
 var NAME_X = 160;
 var NAME_Y = 250;
 var NAME_GAP = BAR_GAP;
+var STAT_X = NAME_X + 5;
+var STAT_Y = 80;
 
 var renderCloud = function (ctx, x1, x2, x3, y, r, color) {
     ctx.fillStyle = color;
@@ -30,7 +32,6 @@ var renderCloud = function (ctx, x1, x2, x3, y, r, color) {
 };
 
 var getMaxElement = function (arr) {
-
     if (arr.length > 0) {
         var maxElement = arr[0];
         for (var i = 0; i < arr.length; i++) {
@@ -48,36 +49,22 @@ window.renderStatistics = function (ctx, players, times) {
     renderCloud(ctx, CX1, CX2, CX3, CY, CR, 'white');
 
     ctx.fillStyle = '#000';
+    ctx.font = '16px PT Mono';
+    ctx.fillText('Ура, вы победили!', 155, 55);
+    ctx.fillText('Список результатов:', 360, 55);
 
     var maxTime = getMaxElement(times);
 
-
     for (var i = 0; i < players.length; i++) {
+        if (players[i] === 'Вы') {
+            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+        } else {
+            ctx.fillStyle = 'blue';
+        }
         var formula = BAR_HEIGHT * times[i] / maxTime;
+        ctx.fillText(Math.floor(times[i]), STAT_X + NAME_GAP * i, STAT_Y + (BAR_HEIGHT - formula));
         ctx.fillText(players[i], NAME_X + NAME_GAP * i, NAME_Y);
         ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y + (BAR_HEIGHT - formula), BAR_WIDTH, formula);
+
     }
-    /*
-    ctx.fillText(playerName, NAME_X + NAME_GAP * playerIndex, NAME_Y);
-    ctx.fillRect(BAR_X + BAR_GAP * playerIndex, BAR_Y, BAR_WIDTH, BAR_HEIGHT);
-
-    playerIndex = 1;
-    playerName = 'Kaye';
-
-    ctx.fillText(playerName, NAME_X + NAME_GAP * playerIndex, NAME_Y);
-    ctx.fillRect(BAR_X + BAR_GAP * playerIndex, BAR_Y, BAR_WIDTH, BAR_HEIGHT);
-
-    playerIndex = 2;
-    playerName = 'Ben';
-
-    ctx.fillText(playerName, NAME_X + NAME_GAP * playerIndex, NAME_Y);
-    ctx.fillRect(BAR_X + BAR_GAP * playerIndex, BAR_Y, BAR_WIDTH, BAR_HEIGHT);
-
-    playerIndex = 3;
-    playerName = 'John';
-
-    ctx.fillText(playerName, NAME_X + NAME_GAP * playerIndex, NAME_Y);
-    ctx.fillRect(BAR_X + BAR_GAP * playerIndex, BAR_Y, BAR_WIDTH, BAR_HEIGHT);
-    */
-
 };
