@@ -3,9 +3,8 @@
 var userDialog = document.querySelector('.overlay');
 userDialog.classList.remove('hidden');
 
-document.querySelector('.setup-similar').classList.remove('hidden');
+var similarListElement = userDialog.querySelector('.setup-similar-list');
 
-var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -18,39 +17,48 @@ var robeColors = ['hsl(140, 100%, 70%)', 'hsl(0, 100%, 65%)', 'hsl(0, 0%, 65%)',
 
 var eyesColors = ['hsl(225, 100%, 60%)', 'hsl(120, 60%, 50%)', 'hsl(40, 100%, 15%)', 'hsl(180, 20%, 50%)', 'hsl(30, 100%, 5%)', 'hsl(0, 100%, 40%)', 'hsl(48, 100%, 50%)'];
 
-var wizards = [];
+function generateRandomData(firstNames, lastNames, robeColors, eyesColors) {
+    var randomData = [];
+    var name = firstNames[parseInt(Math.random() * firstNames.length)] + ' ' + lastNames[parseInt(Math.random() * lastNames.length)];
+    randomData.push(name);
+    var robeColor = robeColors[parseInt(Math.random() * robeColors.length)];
+    randomData.push(robeColor);
+    var eyesColor = eyesColors[parseInt(Math.random() * eyesColors.length)];
+    randomData.push(eyesColor);
 
-function Mage(name, robeColor, eyesColor) {
+    return randomData;
+}
+
+function Wizard(name, robeColor, eyesColor) {
     this.name = name;
     this.robeColor = robeColor;
     this.eyesColor = eyesColor;
 }
-Mage.prototype.constructor = Mage;
+Wizard.prototype.constructor = Wizard;
 
-
-var obj = {};
-for (let i = 0; i < 4; i++) {
-    obj = new Mage(
-        firstNames[parseInt(Math.random() * firstNames.length)] + ' ' + lastNames[parseInt(Math.random() * lastNames.length)],
-        robeColors[parseInt(Math.random() * robeColors.length)],
-        eyesColors[parseInt(Math.random() * eyesColors.length)]
-    )
-    wizards.push(obj);
+function generateWizard() {
+    var data = generateRandomData(firstNames, lastNames, robeColors, eyesColors);
+    var wizard = new Wizard(data[0], data[1], data[2]);
+    return wizard;
 }
 
-var renderWizard = function (wizard) {
+function renderWizard(wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.robeColor;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
     return wizardElement;
 }
 
-var fragment = document.createDocumentFragment();
-for (let i = 0; i < wizards.length; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
+function renderSimilars() {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < 4; i++) {
+        fragment.appendChild(renderWizard(generateWizard()));
+    }
+    similarListElement.appendChild(fragment);
 }
-similarListElement.appendChild(fragment);
+renderSimilars();
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
