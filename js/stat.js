@@ -45,6 +45,8 @@ var getMaxElement = function (arr) {
 }
 
 window.renderStatistics = function (ctx, players, times) {
+
+
     renderCloud(ctx, CX1 + GAP, CX2 + GAP, CX3 + GAP, CY + GAP, CR, 'rgba(0, 0, 0, 0.3)');
     renderCloud(ctx, CX1, CX2, CX3, CY, CR, 'white');
 
@@ -55,12 +57,11 @@ window.renderStatistics = function (ctx, players, times) {
     var maxTime = Math.floor(getMaxElement(times));
     var winCoef;
     for (var i = 0; i < players.length; i++) {
-
         // different saturations of blue for other players
         var sat = parseInt(Math.random() * 100);
         var colorSat = 'hsl(240, ' + sat + '%, 50%)';
 
-        // mixes of blue and random red for you
+        // mixes of blue and random red for your result
         var randomR = parseInt(Math.random() * 255);
         winCoef = times[i] / maxTime; // the more points player has the more pink bar is
         var colorRB = 'rgb(' + Math.floor(255 * winCoef) + ', 0, 255, 1)';

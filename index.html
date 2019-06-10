@@ -62,16 +62,13 @@
     </header>
 
     <div class="overlay setup hidden">
-        <form class="setup-wizard-form" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form class="setup-wizard-form">
 
             <div class="setup-title">
                 <div class="setup-user">
-                    <div class="upload">
-                        <img class="setup-user-pic" src="./img/user-1.jpg" />
-                        <input type="file" name="avatar">
-                    </div>
+                    <img class="setup-user-pic" src="./img/user-1.jpg" />
                     <label>
-                        <input type="text" name="username" maxlength="25" required class="setup-user-name" value="Синий Пендальф" />
+                        <input type="text" class="setup-user-name" value="Синий Пендальф" />
                     </label>
                 </div>
 
@@ -104,13 +101,10 @@
                             </g>
                         </svg>
                     </div>
-                    <input type="hidden" name="coat-color" value="rgb(101, 137, 164)">
-                    <input type="hidden" name="eyes-color" value="black">
                 </div>
 
                 <div class="setup-fireball-wrap">
                     <div class="setup-fireball"></div>
-                    <input type="hidden" name="fireball-color" value="#ee4830">
                 </div>
 
                 <div class="setup-artifacts" dropzone="move">
@@ -170,7 +164,6 @@
             <p class="setup-similar-label">Петр Петров</p>
         </div>
     </template>
-
     <script>
         var fireballSize = 22;
 
@@ -195,8 +188,8 @@
         }
 
     </script>
-    <script src="js/stat.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/stat.js"></script>
 
 </body>
 
