@@ -1,5 +1,7 @@
 'use strict';
 
+const SIMILAR_WIZARDS = 4;
+
 var userDialog = document.querySelector('.overlay');
 userDialog.classList.remove('hidden');
 
@@ -25,8 +27,27 @@ function generateRandomData(firstNames, lastNames, robeColors, eyesColors) {
     randomData.push(robeColor);
     var eyesColor = eyesColors[parseInt(Math.random() * eyesColors.length)];
     randomData.push(eyesColor);
+}
 
-    return randomData;
+// create object using constructor
+function generateWizard() {
+    var data = generateRandomData(firstNames, lastNames, robeColors, eyesColors);
+    var wizard = new Wizard(data[0], data[1], data[2]);
+}
+
+function generateName() {
+    var name = firstNames[parseInt(Math.random() * firstNames.length)] + ' ' + lastNames[parseInt(Math.random() * lastNames.length)];
+    return name;
+}
+
+function generateRobeColor() {
+    var robeColor = robeColors[parseInt(Math.random() * robeColors.length)];
+    return robeColor;
+}
+
+function generateEyesColor() {
+    var eyesColor = eyesColors[parseInt(Math.random() * eyesColors.length)];
+    return eyesColor;
 }
 
 function Wizard(name, robeColor, eyesColor) {
@@ -34,12 +55,13 @@ function Wizard(name, robeColor, eyesColor) {
     this.robeColor = robeColor;
     this.eyesColor = eyesColor;
 }
-Wizard.prototype.constructor = Wizard;
 
 function generateWizard() {
-    var data = generateRandomData(firstNames, lastNames, robeColors, eyesColors);
-    var wizard = new Wizard(data[0], data[1], data[2]);
-    return wizard;
+    return {
+        name: generateName(),
+        robeColor: generateRobeColor(),
+        eyesColor: generateEyesColor()
+    }
 }
 
 function renderWizard(wizard) {
@@ -54,11 +76,11 @@ function renderWizard(wizard) {
 
 function renderSimilars() {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < 4; i++) {
+    for (let i = 0; i < SIMILAR_WIZARDS; i++) {
         fragment.appendChild(renderWizard(generateWizard()));
     }
     similarListElement.appendChild(fragment);
 }
 renderSimilars();
-
+// show similars window
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
