@@ -2,9 +2,6 @@
 
 const SIMILAR_WIZARDS = 4;
 
-var userDialog = document.querySelector('.overlay');
-userDialog.classList.remove('hidden');
-
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -28,6 +25,7 @@ function generateRandomData(firstNames, lastNames, robeColors, eyesColors) {
     var eyesColor = eyesColors[parseInt(Math.random() * eyesColors.length)];
     randomData.push(eyesColor);
 }
+
 
 // create object using constructor
 function generateWizard() {
@@ -82,5 +80,3 @@ function renderSimilars() {
     similarListElement.appendChild(fragment);
 }
 renderSimilars();
-// show similars window
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
