@@ -2,8 +2,8 @@
 
 const SIMILAR_WIZARDS = 4;
 
+var userDialog = document.querySelector('.overlay');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
-
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -80,3 +80,5 @@ function renderSimilars() {
     similarListElement.appendChild(fragment);
 }
 renderSimilars();
+
+document.querySelector('.setup-similar').classList.remove('hidden');
