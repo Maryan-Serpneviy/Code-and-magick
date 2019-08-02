@@ -1,7 +1,5 @@
 'use strict';
 
-const SIMILAR_WIZARDS = 4;
-
 var userDialog = document.querySelector('.overlay');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -25,7 +23,6 @@ function generateRandomData(firstNames, lastNames, robeColors, eyesColors) {
     var eyesColor = eyesColors[parseInt(Math.random() * eyesColors.length)];
     randomData.push(eyesColor);
 }
-
 
 // create object using constructor
 function generateWizard() {
@@ -72,13 +69,18 @@ function renderWizard(wizard) {
     return wizardElement;
 }
 
-function renderSimilars() {
+function renderSimilarsFn() {
+    var SIMILAR_WIZARDS = 4;
     var fragment = document.createDocumentFragment();
-    for (let i = 0; i < SIMILAR_WIZARDS; i++) {
-        fragment.appendChild(renderWizard(generateWizard()));
+
+    return function () {
+        for (let i = 0; i < SIMILAR_WIZARDS; i++) {
+            fragment.appendChild(renderWizard(generateWizard()));
+        }
+        similarListElement.appendChild(fragment);
     }
-    similarListElement.appendChild(fragment);
 }
+var renderSimilars = renderSimilarsFn();
 renderSimilars();
 
 document.querySelector('.setup-similar').classList.remove('hidden');

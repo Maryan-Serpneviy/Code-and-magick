@@ -19,7 +19,6 @@ const FIREBALL_COLORS = [
 
 const ESC_KEYCODE = 27;
 const ENTER_KEYCODE = 13;
-var COUNT_START = 0;
 
 var setup = document.querySelector('.overlay');
 var setupOpen = document.querySelector('.setup-open');
@@ -35,11 +34,12 @@ Object.defineProperty(
     }
 );
 
-var onPopupEscPress = function (evt) {
+var onPopupEscPressFn = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
         closePopup();
     }
 }
+var onPopupEscPress = onPopupEscPressFn;
 
 var openPopup = function () {
     setup.classList.remove('hidden');
@@ -48,7 +48,7 @@ var openPopup = function () {
 
 var closePopup = function () {
     setup.classList.add('hidden');
-    document.removeEventListener('keydown', onPopupEscPress)
+    document.removeEventListener('keydown', onPopupEscPress);
 }
 
 setupOpen.addEventListener('click', function () {
@@ -77,20 +77,32 @@ let wizardRobe = document.querySelector('.setup-wizard .wizard-coat');
 let wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
 let fireball = document.querySelector('.setup-fireball-wrap');
 
-function changeRobeColor() {
-    wizardRobe.style.fill = robeColors[COUNT_START];
-    COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+function changeRobeColorFn() {
+    var COUNT_START = 0
+    return function () {
+        wizardRobe.style.fill = robeColors[COUNT_START];
+        COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+    }
 }
+var changeRobeColor = changeRobeColorFn();
 
-function changeEyesColor() {
-    wizardEyes.style.fill = eyesColors[COUNT_START];
-    COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+function changeEyesColorFn() {
+    var COUNT_START = 0;
+    return function () {
+        wizardEyes.style.fill = eyesColors[COUNT_START];
+        COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+    }
 }
+var changeEyesColor = changeEyesColorFn();
 
-function changeFireballColor() {
-    fireball.style.backgroundColor = FIREBALL_COLORS[COUNT_START];
-    COUNT_START == FIREBALL_COLORS.length - 1 ? COUNT_START = 0 : COUNT_START++;
+function changeFireballColorFn() {
+    var COUNT_START = 0;
+    return function () {
+        fireball.style.backgroundColor = FIREBALL_COLORS[COUNT_START + 1];
+        COUNT_START == FIREBALL_COLORS.length - 1 ? COUNT_START = 0 : COUNT_START++;
+    }
 }
+var changeFireballColor = changeFireballColorFn();
 
 wizardRobe.addEventListener('click', function () {
     changeRobeColor();
