@@ -1,6 +1,6 @@
 'use strict';
 
-const ROBE_COLORS = [
+var ROBE_COLORS = [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
     'rgb(146, 100, 161)',
@@ -8,18 +8,14 @@ const ROBE_COLORS = [
     'rgb(215, 210, 55)',
     'rgb(0, 0, 0)'
 ];
-
-const FIREBALL_COLORS = [
+var FIREBALL_COLORS = [
     '#ee4830',
     '#30a8ee',
     '#5ce6c0',
     '#e848d5',
     '#e6e848'
 ];
-
-const ESC_KEYCODE = 27;
-const ENTER_KEYCODE = 13;
-
+var MIN_NAME_LENGTH = 5;
 var setup = document.querySelector('.overlay');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
@@ -34,105 +30,95 @@ Object.defineProperty(
     }
 );
 
-var onPopupEscPressFn = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+var onPopupEscPress = function(evt) {
+    if (evt.key === 'Escape') {
         closePopup();
     }
-}
-var onPopupEscPress = onPopupEscPressFn;
+};
 
-var openPopup = function () {
-    setup.classList.remove('hidden');
-    document.addEventListener('keydown', onPopupEscPress);
-}
-
-var closePopup = function () {
-    setup.classList.add('hidden');
-    document.removeEventListener('keydown', onPopupEscPress);
-}
-
-setupOpen.addEventListener('click', function () {
-    openPopup();
-});
-
-setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+var onAvatarEntPress = function(evt) {
+    if (evt.key === 'Enter') {
         openPopup();
     }
-});
+};
 
-setupClose.addEventListener('click', function () {
-    closePopup();
-});
-
-setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+var onCrossEntPress = function (evt) {
+    if (evt.key === 'Enter') {
         closePopup();
     }
-});
+};
+
+var openPopup = function() {
+    setup.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function() {
+    setup.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', openPopup);
+setupOpen.addEventListener('keydown', onAvatarEntPress);
+setupClose.addEventListener('click', closePopup);
+setupClose.addEventListener('keydown', onCrossEntPress);
 
 // CHARACTER CUSTOMIZING
-
 let wizardRobe = document.querySelector('.setup-wizard .wizard-coat');
 let wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
 let fireball = document.querySelector('.setup-fireball-wrap');
 
-function changeRobeColorFn() {
-    var COUNT_START = 0
-    return function () {
-        wizardRobe.style.fill = robeColors[COUNT_START];
-        COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+var changeRobeColorClosure = function() {
+    var count = 0
+    return function() {
+        wizardRobe.style.fill = robeColors[count];
+        count == eyesColors.length - 1 ? count = 0 : count++;
     }
-}
-var changeRobeColor = changeRobeColorFn();
+};
+var changeRobeColor = changeRobeColorClosure();
 
-function changeEyesColorFn() {
-    var COUNT_START = 0;
-    return function () {
-        wizardEyes.style.fill = eyesColors[COUNT_START];
-        COUNT_START == eyesColors.length - 1 ? COUNT_START = 0 : COUNT_START++;
+var changeEyesColorClosure = function() {
+    var count = 0;
+    return function() {
+        wizardEyes.style.fill = eyesColors[count];
+        count == eyesColors.length - 1 ? count = 0 : count++;
     }
-}
-var changeEyesColor = changeEyesColorFn();
+};
+var changeEyesColor = changeEyesColorClosure();
 
-function changeFireballColorFn() {
-    var COUNT_START = 0;
-    return function () {
-        fireball.style.backgroundColor = FIREBALL_COLORS[COUNT_START + 1];
-        COUNT_START == FIREBALL_COLORS.length - 1 ? COUNT_START = 0 : COUNT_START++;
+var changeFireballColorClosure = function() {
+    var count = 0;
+    return function() {
+        fireball.style.backgroundColor = FIREBALL_COLORS[count];
+        count == FIREBALL_COLORS.length - 1 ? count = 0 : count++;
     }
-}
-var changeFireballColor = changeFireballColorFn();
+};
+var changeFireballColor = changeFireballColorClosure();
 
-wizardRobe.addEventListener('click', function () {
-    changeRobeColor();
-});
+wizardRobe.addEventListener('click', changeRobeColor);
 
-wizardEyes.addEventListener('click', function () {
-    changeEyesColor();
-});
+wizardEyes.addEventListener('click', changeEyesColor);
 
-fireball.addEventListener('click', function () {
-    changeFireballColor();
-});
+fireball.addEventListener('click', changeFireballColor);
 
 // VALIDATION
-
 var userNameInput = setup.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function() {
     if (userNameInput.validity.tooShort) {
-        userNameInput.setCustomValidity('Name must be at least 2 characters long');
+        userNameInput.setCustomValidity('Name must be at least 5 characters long');
     } else if (userNameInput.validity.tooLong) {
         userNameInput.setCustomValidity('Name must not exceed 25 characters');
     } else if (userNameInput.validity.valueMissing) {
         userNameInput.setCustomValidity('Type the name of your character');
     } else {
-        userName.setCustomValidity('');
+        userNameInput.setCustomValidity('');
     }
 });
 
-userNameInput.addEventListener('input', function (evt) {
+userNameInput.addEventListener('input', function(evt) {
     var target = evt.target;
-    target.value.length < 2 ? target.setCustomValidity('Name must be at least 2 characters long') : target.setCustomValidity('');
+    target.value.length < MIN_NAME_LENGTH ?
+    target.setCustomValidity('Name must be at least 2 characters long') : 
+    target.setCustomValidity('');
 });
