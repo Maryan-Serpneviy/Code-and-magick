@@ -451,16 +451,16 @@ window.Game = (function () {
             }));
             return;
           }
-          message = 'Вы победили Газебо!\nУра!';
+          message = 'You have defeated Gazebo!\nCongratulations!';
           break;
         case Verdict.FAIL:
-          message = 'Вы проиграли!';
+          message = 'You lose!';
           break;
         case Verdict.PAUSE:
-          message = 'Игра на паузе!\nНажмите Пробел, чтобы продолжить';
+          message = 'Game paused!\nPress <SPACE> to continue';
           break;
         case Verdict.INTRO:
-          message = 'Добро пожаловать!\nНажмите Пробел для начала игры';
+          message = 'Welcome to Code and Magick!\nPress <SPACE> to start';
           break;
       }
 

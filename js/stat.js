@@ -44,16 +44,14 @@ var getMaxElement = function(arr) {
     return null;
 }
 
-console.log(players);
-
 window.renderStatistics = function(ctx, players, times) {
     renderCloud(ctx, CX1 + GAP, CX2 + GAP, CX3 + GAP, CY + GAP, CR, 'rgba(0, 0, 0, 0.3)');
     renderCloud(ctx, CX1, CX2, CX3, CY, CR, 'white');
 
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
-    ctx.fillText('Congratulations, you won!', 155, 55);
-    ctx.fillText('Results:', 360, 55);
+    ctx.fillText('Congratulations, you won!', 175, 55);
+    ctx.fillText('Results:', 450, 55);
 
     var maxTime = Math.floor(getMaxElement(times));
     var winCoef;
