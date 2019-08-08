@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-    var setup = document.querySelector('.overlay');
+    window.setup = document.querySelector('.overlay');
     var setupOpen = document.querySelector('.setup-open');
     var setupClose = setup.querySelector('.setup-close');
 
@@ -36,5 +36,5 @@
     setupOpen.addEventListener('click', openPopup);
     setupOpen.addEventListener('keydown', onAvatarEntPress);
     setupClose.addEventListener('click', closePopup);
-    setupClose.addEventListener('keydown', onCrossEntPress);    
+    setupClose.addEventListener('keydown', onCrossEntPress);
 })();
