@@ -6,10 +6,26 @@
         xhr.responseType = 'json';
 
         xhr.addEventListener('load', function() {
-            if (xhr.status === 200) {
-                onSuccess(xhr.response);
-            } else {
-                onError('Response status: ' + xhr.status + ' ' + xhr.statusText);
+            var error;
+            switch (xhr.status) {
+                case 200:
+                    onSuccess(xhr.response);
+                    break;
+                case 400:
+                    error = 'Bad request';
+                    break;
+                case 401:
+                    error = 'User not authorized';
+                    break;
+                case 404:
+                    error = 'Not found';
+                    break;
+                default:
+                    error = 'Response status: ' + xhr.status + ' ' + xhr.statusText;
+            }
+
+            if (error) {
+                onError(error);
             }
         });
         xhr.addEventListener('error', function() {
