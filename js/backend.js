@@ -1,10 +1,11 @@
 'use strict';
 
 (function() {
-    var URL = 'https://js.dump.academy/code-and-magick/data';
+    var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
+    var SAVE_URL = 'https://js.dump.academy/code-and-magick/data';
 
     window.backend = {
-        load: function(onLoad, onError) {
+        request: function(onLoad, onError, url, method) {
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'json';
     
@@ -12,7 +13,7 @@
                 var error;
                 switch (xhr.status) {
                     case 200:
-                        onLoad(xhr.response);
+                        onLoad(xhr.response); // downloadSimilars(arr)
                         break;
                     case 400:
                         error = 'Bad request';
@@ -39,15 +40,20 @@
     
             xhr.timeout = 10000;
     
-            xhr.open('GET', URL);
+            xhr.open(method, url);
             xhr.send();
         },
+        load: function(onLoad, onError) {
+            this.request(onLoad, onError, LOAD_URL, 'GET');
+        },
         save: function(data, onLoad, onError) {
-            
+            this.request(onLoad, onError, SAVE_URL, 'POST');
         },
         showErrorMessage: function(errorMessage) {
             var node = document.createElement('div');
-            node.style = 'z-index: 10; margin: 0 auto; text-align: center; background-color: red;'
+            node.style = 'z-index: 10; margin: 0 auto;';
+            node.style.textAlign = 'center';
+            node.style.backgroundColor = 'red';
             node.style.position = 'absolute';
             node.style.left = 0;
             node.style.right = 0;
