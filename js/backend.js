@@ -5,7 +5,7 @@
     var SAVE_URL = 'https://js.dump.academy/code-and-magick/data';
 
     window.backend = {
-        request: function(onLoad, onError, url, method) {
+        request: function(onLoad, onError, url, method, data) {
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'json';
     
@@ -41,13 +41,13 @@
             xhr.timeout = 10000;
     
             xhr.open(method, url);
-            xhr.send();
+            xhr.send(data);
         },
         load: function(onLoad, onError) {
             this.request(onLoad, onError, LOAD_URL, 'GET');
         },
         save: function(data, onLoad, onError) {
-            this.request(onLoad, onError, SAVE_URL, 'POST');
+            this.request(onLoad, onError, SAVE_URL, 'POST', data);
         },
         showErrorMessage: function(errorMessage) {
             var node = document.createElement('div');
