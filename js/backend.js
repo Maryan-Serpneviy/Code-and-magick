@@ -2,7 +2,7 @@
 
 (function() {
     var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
-    var SAVE_URL = 'https://js.dump.academy/code-and-magick/data';
+    var SAVE_URL = 'https://js.dump.academy/code-and-magick';
 
     window.backend = {
         request: function(onLoad, onError, url, method, data) {
@@ -16,13 +16,13 @@
                         onLoad(xhr.response); // downloadSimilars(arr)
                         break;
                     case 400:
-                        error = 'Bad request';
+                        error = '400: Bad request';
                         break;
                     case 401:
-                        error = 'User not authorized';
+                        error = '401: User not authorized';
                         break;
                     case 404:
-                        error = 'Not found';
+                        error = '404: Not found';
                         break;
                     default:
                         error = 'Response status: ' + xhr.status + ' ' + xhr.statusText;
@@ -50,16 +50,13 @@
             this.request(onLoad, onError, SAVE_URL, 'POST', data);
         },
         showErrorMessage: function(errorMessage) {
-            var node = document.createElement('div');
-            node.style = 'z-index: 10; margin: 0 auto;';
-            node.style.textAlign = 'center';
-            node.style.backgroundColor = 'red';
-            node.style.position = 'absolute';
-            node.style.left = 0;
-            node.style.right = 0;
-            node.style.fontSize = '30px';
-            node.textContent = errorMessage;
-            document.body.insertAdjacentElement('afterbegin', node);
+            var errorBlock = document.querySelector('.download-error')
+            errorBlock.classList.remove('hidden');
+            document.querySelector('.download-error__message').textContent =  'Error! ' + errorMessage;
+            var errorClose = document.querySelector('.download-error__close')
+            errorClose.addEventListener('click', function() {
+                errorBlock.style = 'transform: scale(0); transition: all 0.3s ease';
+            });
         }
     };
 })();
