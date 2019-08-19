@@ -12,7 +12,6 @@
     window.eyesColors = ['hsl(225, 100%, 60%)', 'hsl(120, 60%, 50%)', 'hsl(40, 100%, 15%)', 'hsl(180, 20%, 50%)', 'hsl(30, 100%, 5%)', 'hsl(0, 100%, 40%)'];
     window.FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
     var WIZARDS = 4;
-    var URL = 'https://js.dump.academy/code-and-magick/data';
 
     var renderWizard = function(wizard) {
         var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -22,8 +21,9 @@
 
         return wizardElement;
     };
-
-    var successHandler = function(wizards) {
+    
+    // MODULE 6
+    var downloadSimilars = function(wizards) {
         var fragment = document.createDocumentFragment();
         for (var i = 0; i < WIZARDS; i++) {
             fragment.appendChild(renderWizard(wizards[i]));
@@ -31,25 +31,13 @@
         similarListElement.appendChild(fragment);
         userDialog.querySelector('.setup-similar').classList.remove('hidden');
     };
-
-    var errorHandler = function(errorMessage) {
-        var node = document.createElement('div');
-        node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;'
-        node.style.position = 'absolute';
-        node.style.left = 0;
-        node.style.right = 0;
-        node.style.fontSize = '30px';
-
-        node.textContent = errorMessage;
-        document.body.insertAdjacentElement('afterbegin', node);
-    };
-    window.download(successHandler, errorHandler, URL);
+    window.backend.load(downloadSimilars, window.backend.showErrorMessage);
 
     var form = userDialog.querySelector('.setup-wizard-form');
+
     form.addEventListener('submit', function(evt) {
-        window.upload(new FormData(form), function(response) {
-            userDialog.classList.add('hidden');
-        });
+        window.backend.save(new FormData(form), downloadSimilars, window.backend.showErrorMessage);
+        userDialog.classList.add('hidden');
         evt.preventDefault();
     });
 })();
