@@ -50,8 +50,8 @@
             this.request(onLoad, onError, SAVE_URL, 'POST', data);
         },
         showErrorMessage: function(errorMessage) {
-            var errorBlock = document.querySelector('.download-error')
-            errorBlock.classList.remove('hidden');
+            var errorBlock = document.querySelector('.download-error');
+            errorBlock.style = 'visibility: visible';
             document.querySelector('.download-error__message').textContent =  'Error! ' + errorMessage;
             var errorClose = document.querySelector('.download-error__close')
             errorClose.addEventListener('click', function() {
