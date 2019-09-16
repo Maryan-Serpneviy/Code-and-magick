@@ -1,3 +1,5 @@
+import { getMaxElement } from './utils.js';
+
 const CX1 = 200;
 const CX2 = 350;
 const CX3 = 500;
@@ -25,19 +27,8 @@ const renderCloud = (ctx, x1, x2, x3, y, r, color) => {
     ctx.fill();
     //ctx.stroke();
 };
-const getMaxElement = arr => {
-    if (arr.length > 0) {
-        let maxElement = arr[0];
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i] > maxElement) {
-                maxElement = arr[i];
-            }
-        }
-        return maxElement;
-    }
-    return null;
-}
-window.renderStatistics = (ctx, players, times) => {
+
+const renderStatistics = (ctx, players, times) => {
     renderCloud (ctx, CX1 + GAP, CX2 + GAP, CX3 + GAP, CY + GAP, CR, 'rgba(0, 0, 0, 0.3)');
     renderCloud (ctx, CX1, CX2, CX3, CY, CR, 'white');
     ctx.fillStyle = '#000';
@@ -69,3 +60,5 @@ window.renderStatistics = (ctx, players, times) => {
         ctx.fillRect (BAR_X + BAR_GAP * i, BAR_Y + (BAR_HEIGHT - formula), BAR_WIDTH, formula);
     }
 };
+
+export { renderStatistics };
