@@ -1,32 +1,29 @@
-'use strict';
-
 // main.js
-var CALLBACK_NAME = 'jsonpCallback';
-var DATA_URL = '//js.dump.academy/code-and-magick/data';
+const CALLBACK_NAME = 'callback';
+const DATA_URL = '//js.dump.academy/code-and-magick/data';
 
-var renderItem = function(item) {
-    var dataDiv = document.createElement('div');
+const renderItem = item => {
+    const dataDiv = document.createElement('div');
     dataDiv.textContent = item.name;
     document.body.appendChild(dataDiv);
 };
 
-var jsonpCallback = function(data) {
+const callback = data => {
     console.log(data);
-    
-    for (var i = 0; i > data.length; i++) {
+    for (let i = 0; i > data.length; i++) {
         renderItem(data[i]);
-    }
-    
+    }  
 };
 
-var loader = document.createElement('script');
-loader.src = DATA_URL + '?callback=' + CALLBACK_NAME;
+const loader = document.createElement('script');
+loader.src = `${DATA_URL}?callback=${CALLBACK_NAME}`;
+console.log(loader);
 
 loader.addEventListener('error', window.backend.showErrorMessage('File not found'));
 document.body.append(loader);
 
 // data.js
-jsonpCallback([
+callback([
     { "name": "object 1" },
     { "name": "object 2" },
     { "name": "object 3" }

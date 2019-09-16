@@ -1,15 +1,15 @@
 'use strict';
 
 (function() {
-    var userDialog = document.querySelector('.overlay');
-    var similarListElement = userDialog.querySelector('.setup-similar-list');
-    var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+    const userDialog = document.querySelector('.overlay');
+    const similarListElement = userDialog.querySelector('.setup-similar-list');
+    const similarWizardTemplate = document.querySelector('#similar-wizard-template')
         .content
         .querySelector('.setup-similar-item');
-    var SIMILARS = 4;
+    const SIMILARS = 4;
 
-    var getRandomArrayElements = function(arr, count) {
-        var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+    const getRandomArrayElements = (arr, count) => {
+        let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
         while (i-- > min) {
             index = Math.floor((i + 1) * Math.random());
             temp = shuffled[index];
@@ -19,8 +19,8 @@
         return shuffled.slice(min);
     };
 
-    var renderWizard = function(wizard) {
-        var wizardElement = similarWizardTemplate.cloneNode(true);
+    const renderWizard = wizard => {
+        const wizardElement = similarWizardTemplate.cloneNode(true);
         wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
         wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
         wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
@@ -28,21 +28,21 @@
     };
     
     // MODULE 6
-    var downloadSimilars = function(wizards) {
-        var randomWizards = getRandomArrayElements(wizards, SIMILARS);
-        var fragment = document.createDocumentFragment();
-        for (var i = 0; i < randomWizards.length; i++) {
+    const downloadSimilars = wizards => {
+        const randomWizards = getRandomArrayElements(wizards, SIMILARS);
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < randomWizards.length; i++) {
             fragment.appendChild(renderWizard(randomWizards[i]));
         }
         similarListElement.appendChild(fragment);
         userDialog.querySelector('.setup-similar').classList.remove('hidden');
     };
-    window.backend.load(downloadSimilars, window.backend.showErrorMessage);
+    window.backend.load (downloadSimilars, window.backend.errorHandler);
 
-    var form = userDialog.querySelector('.setup-wizard-form');
+    const form = userDialog.querySelector('.setup-wizard-form');
 
-    form.addEventListener('submit', function(evt) {
-        window.backend.save(new FormData(form), downloadSimilars, window.backend.showErrorMessage);
+    form.addEventListener ('submit', evt => {
+        window.backend.save (new FormData(form), downloadSimilars, window.backend.errorHandler);
         userDialog.classList.add('hidden');
         evt.preventDefault();
     });

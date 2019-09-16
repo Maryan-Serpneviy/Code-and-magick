@@ -1,23 +1,23 @@
 'use strict';
 
 (function() {
-    var dialogHandler = setup.querySelector('input[type=file]');
+    const dialogHandler = setup.querySelector('input[type=file]');
 
-    dialogHandler.addEventListener('mousedown', function(evt) {
+    dialogHandler.addEventListener ('mousedown', evt => {
         evt.preventDefault();
 
-        var dragged = false;
+        let dragged = false;
 
-        var startCoords = {
+        let startCoords = {
             x: evt.clientX,
             y: evt.clientY
         };
 
-        var onMouseMove = function(moveEvt) {
+        const onMouseMove = moveEvt => {
             moveEvt.preventDefault();
             dragged = true;
 
-            var shift = {
+            const shift = {
                 x: startCoords.x - moveEvt.clientX,
                 y: startCoords.y - moveEvt.clientY
             };
@@ -27,25 +27,25 @@
                 y: moveEvt.clientY
             };
 
-            setup.style.top = (setup.offsetTop - shift.y) + 'px';
-            setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+            setup.style.top = `${setup.offsetTop - shift.y}px`;
+            setup.style.left = `${setup.offsetLeft - shift.x}px`;
         };
 
-        var onMouseUp = function(upEvt) {
+        const onMouseUp = upEvt => {
             upEvt.preventDefault();
 
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
+            document.removeEventListener ('mousemove', onMouseMove);
+            document.removeEventListener ('mouseup', onMouseUp);
             
             if (dragged) {
-                var onClickPreventDefault = function(evt) {
+                const onClickPreventDefault = evt => {
                     evt.preventDefault();
-                    dialogHandler.removeEventListener('click', onClickPreventDefault);
+                    dialogHandler.removeEventListener ('click', onClickPreventDefault);
                 };
-                dialogHandler.addEventListener('click', onClickPreventDefault);
+                dialogHandler.addEventListener ('click', onClickPreventDefault);
             }
         };
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener ('mousemove', onMouseMove);
+        document.addEventListener ('mouseup', onMouseUp);
     });    
 })();

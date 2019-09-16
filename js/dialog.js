@@ -2,33 +2,33 @@
 
 (function () {
     window.setup = document.querySelector('.overlay');
-    var setupOpen = document.querySelector('.setup-open');
-    var setupClose = setup.querySelector('.setup-close');
+    const setupOpen = document.querySelector('.setup-open');
+    const setupClose = setup.querySelector('.setup-close');
 
-    var onPopupEscPress = function(evt) {
+    const onPopupEscPress = evt => {
         if (evt.key === 'Escape') {
             closePopup();
         }
     };
 
-    var onAvatarEntPress = function(evt) {
+    const onAvatarEntPress = evt => {
         if (evt.key === 'Enter') {
             openPopup();
         }
     };
 
-    var onCrossEntPress = function (evt) {
+    const onCrossEntPress = evt => {
         if (evt.key === 'Enter') {
             closePopup();
         }
     };
 
-    var openPopup = function() {
+    const openPopup = () => {
         setup.classList.remove('hidden');
         document.addEventListener('keydown', onPopupEscPress);
     };
 
-    var closePopup = function() {
+    const closePopup = () => {
         setup.classList.add('hidden');
         document.removeEventListener('keydown', onPopupEscPress);
     };
