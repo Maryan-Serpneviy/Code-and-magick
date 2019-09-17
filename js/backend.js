@@ -1,8 +1,5 @@
 import constants from './constants.js';
 
-const LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
-const SAVE_URL = 'https://js.dump.academy/code-and-magick';
-
 export default {
     request (onLoad, onError, url, method, data) {
         const xhr = new XMLHttpRequest();

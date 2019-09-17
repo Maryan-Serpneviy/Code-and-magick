@@ -1,5 +1,5 @@
+import utils from './utils.js';
 import backend from './backend.js';
-import { getRandomArrayElements } from './utils.js';
 
 const userDialog = document.querySelector('.overlay');
 const similarListElement = userDialog.querySelector('.setup-similar-list');
@@ -18,7 +18,7 @@ const renderWizard = wizard => {
 
 // MODULE 6
 const downloadSimilars = wizards => {
-    const randomWizards = getRandomArrayElements(wizards, SIMILARS);
+    const randomWizards = utils.getRandomArrayElements(wizards, SIMILARS);
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < randomWizards.length; i++) {
         fragment.appendChild(renderWizard(randomWizards[i]));

@@ -1,0 +1,11 @@
+importModule('./js/game');
+importModule('./js/constants');
+importModule('./js/utils');
+importModule('./js/stats');
+importModule('./js/backend');
+importModule('./js/similars');
+importModule('./js/colorize');
+importModule('./js/name-validation');
+importModule('./js/dialog');
+importModule('./js/dialog-dnd');
+importModule('./js/dnd');

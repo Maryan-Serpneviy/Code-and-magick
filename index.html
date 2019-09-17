@@ -6,7 +6,16 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>Код и Магия</title>
+  <script>
+    const importModule = path => {
+      const scriptElem = document.createElement('script');
+      scriptElem.type = 'module';
+      scriptElem.src = `${path}.js`;
+      document.head.appendChild(scriptElem);
+    };
+  </script>
   <!-- Modules -->
+  <!--
   <script type="module" src="js/constants.js"></script>
   <script type="module" src="js/utils.js"></script>
   <script type="module" src="js/game.js"></script>
@@ -17,7 +26,9 @@
   <script type="module" src="js/name-validation.js"></script>
   <script type="module" src="js/colorize.js"></script>
   <script type="module" src="js/dialog-dnd.js"></script>
-  <script type="module" src="js/dnd.js"></script>  
+  <script type="module" src="js/dnd.js"></script>
+  -->
+  <script src="index.js"></script>
 </head>
 <body>
 
