@@ -9,7 +9,7 @@ export default {
             let error;
             switch (xhr.status) {
                 case 200:
-                    onLoad (xhr.response); // downloadSimilars(arr)
+                    onLoad (xhr.response);
                     break;
                 case 400:
                     error = `400: Bad request`;
@@ -46,6 +46,7 @@ export default {
         this.request(onLoad, onError, Constants.SAVE_URL, 'POST', data);
     },
     errorHandler (errorMessage) {
+        console.log(errorMessage);
         const errorBlock = document.querySelector('.download-error');
         errorBlock.style = `visibility: visible`;
         document.querySelector('.download-error__message').textContent =  `Error! ${errorMessage}`;

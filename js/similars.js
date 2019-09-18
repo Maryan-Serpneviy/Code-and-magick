@@ -1,35 +1,66 @@
 import Utils from './utils.js';
-import backend from './backend.js';
+import ajax from './ajax.js';
+import { renderWizard } from './render.js';
+import { CurrentColor } from './colorize.js';
 
 const userDialog = document.querySelector('.overlay');
 const similarListElement = userDialog.querySelector('.setup-similar-list');
-const similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
 const SIMILARS = 4;
 
-const renderWizard = wizard => {
-    const wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-    return wizardElement;
-};
+let wizards = [];
 
-// MODULE 6
-const downloadSimilars = wizards => {
-    const randomWizards = Utils.getRandomArrayElements(wizards, SIMILARS);
+const renderSimilars = data => {
+    wizards = data;
+    
+    const randomWizards = Utils.getRandomArrayElements(data, SIMILARS);
     const fragment = document.createDocumentFragment();
-    for (let i = 0; i < randomWizards.length; i++) {
-        fragment.appendChild(renderWizard(randomWizards[i]));
-    }
+    randomWizards.forEach(elem => {
+        fragment.appendChild(renderWizard(elem));
+    })
     similarListElement.appendChild(fragment);
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
-backend.load (downloadSimilars, backend.errorHandler);
-const form = userDialog.querySelector('.setup-wizard-form');
-form.addEventListener ('submit', evt => {
-    backend.save (new FormData(form), downloadSimilars, backend.errorHandler);
-    userDialog.classList.add('hidden');
-    evt.preventDefault();
-});
+
+const getRank = wizard => {
+    let rank = 0;
+
+    if (wizard.colorCoat === CurrentColor.ROBE) {
+        rank += 2;
+    }
+    if (wizard.colorEyes === CurrentColor.EYES) {
+        rank += 1;
+    }
+    return rank;
+};
+
+const namesComparator = (left, right) => {
+    if (left > right) {
+        return 1;
+    } else if (left < right) {
+        return -1;
+    } else {
+        return 0;
+    }
+};
+
+const updateSimilars = () => {
+    similarListElement.innerHTML = ''; // clear similars
+    const sameRobeAndEyesWizards = wizards.filter(elem => {
+        return CurrentColor.ROBE === elem.colorCoat &&
+        CurrentColor.EYES === elem.colorEyes;
+    });
+    const sameRobeWizards = wizards.filter(elem => CurrentColor.ROBE === elem.colorCoat);
+    const sameEyesWizards = wizards.filter(elem => CurrentColor.EYES === elem.colorEyes);
+    const updatedSimilars = sameRobeWizards.concat(sameEyesWizards).concat(wizards);
+    const uniqueSimilars = updatedSimilars.filter((elem, index) => updatedSimilars.indexOf(elem) === index);
+    
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < SIMILARS; i++) {
+        fragment.appendChild(renderWizard(uniqueSimilars[i]));
+    }
+    similarListElement.appendChild(fragment);
+};
+
+ajax.load (renderSimilars, ajax.errorHandler);
+
+export { updateSimilars };

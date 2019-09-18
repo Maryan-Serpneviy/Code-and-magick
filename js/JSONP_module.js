@@ -9,10 +9,10 @@ const renderItem = item => {
 };
 
 const callback = data => {
-    console.log(data);
-    for (let i = 0; i > data.length; i++) {
-        renderItem(data[i]);
-    }  
+    console.log(data); 
+    data.forEach(element => {
+        renderItem(element);
+    });
 };
 
 const loader = document.createElement('script');
