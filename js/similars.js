@@ -1,4 +1,4 @@
-import utils from './utils.js';
+import Utils from './utils.js';
 import backend from './backend.js';
 
 const userDialog = document.querySelector('.overlay');
@@ -18,7 +18,7 @@ const renderWizard = wizard => {
 
 // MODULE 6
 const downloadSimilars = wizards => {
-    const randomWizards = utils.getRandomArrayElements(wizards, SIMILARS);
+    const randomWizards = Utils.getRandomArrayElements(wizards, SIMILARS);
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < randomWizards.length; i++) {
         fragment.appendChild(renderWizard(randomWizards[i]));

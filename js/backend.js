@@ -1,4 +1,4 @@
-import constants from './constants.js';
+import Constants from './constants.js';
 
 export default {
     request (onLoad, onError, url, method, data) {
@@ -34,16 +34,16 @@ export default {
             this.errorHandler (`Request did not manage to fulfill in' ${xhr.timeout / 1000} s`);
         });
 
-        xhr.timeout = constants.TIMEOUT;
+        xhr.timeout = Constants.TIMEOUT;
 
         xhr.open (method, url);
         xhr.send (data);
     },
     load (onLoad, onError) {
-        this.request(onLoad, onError, constants.LOAD_URL, 'GET');
+        this.request(onLoad, onError, Constants.LOAD_URL, 'GET');
     },
     save (data, onLoad, onError) {
-        this.request(onLoad, onError, constants.SAVE_URL, 'POST', data);
+        this.request(onLoad, onError, Constants.SAVE_URL, 'POST', data);
     },
     errorHandler (errorMessage) {
         const errorBlock = document.querySelector('.download-error');
@@ -51,7 +51,7 @@ export default {
         document.querySelector('.download-error__message').textContent =  `Error! ${errorMessage}`;
         const errorClose = document.querySelector('.download-error__close')
         errorClose.addEventListener('click', () => {
-            errorBlock.style = `transform: scale(0); transition: all 0.3s ease`;
+            errorBlock.style = Constants.VANISH;
         });
     }
 };
