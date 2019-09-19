@@ -20,5 +20,14 @@ export default {
             shuffled[i] = temp;
         }
         return shuffled.slice(min);
-    }
+    },
+    debounce: (() => {
+        let lastTimeout = null;
+        return (cb, ms) => {
+            clearTimeout(lastTimeout);
+            lastTimeout = setTimeout(() => {
+                cb()
+            }, ms)
+        }
+    })()
 };
