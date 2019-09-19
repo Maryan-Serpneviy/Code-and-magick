@@ -1,4 +1,5 @@
-const MIN_NAME_LENGTH = 5;
+import Const from './constants.js';
+
 const setup = document.querySelector('.overlay');
 const userNameInput = setup.querySelector('.setup-user-name');
 
@@ -16,7 +17,7 @@ userNameInput.addEventListener ('invalid', () => {
 
 userNameInput.addEventListener ('input', evt => {
     const target = evt.target;
-    target.value.length < MIN_NAME_LENGTH ?
+    target.value.length < Const.MIN_NAME_LENGTH ?
     target.setCustomValidity('Name must be at least 2 characters long') : 
     target.setCustomValidity('');
 });
