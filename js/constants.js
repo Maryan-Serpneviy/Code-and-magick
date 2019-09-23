@@ -7,7 +7,7 @@ export default {
     },
     TIMEOUT: {
         XHR: 10000,
-        DEBOUNCE: 650
+        DEBOUNCE: 0.65
     },
     EFFECT: {
         VANISH: 'transform: scale(0); transition: all 0.3s ease'
