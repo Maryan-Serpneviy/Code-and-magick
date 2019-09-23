@@ -17,8 +17,9 @@ const colorize = colors => {
     return function() {
         count === colors.length - 1 ? count = 0 : count++;
         if (colors === Const.COLOR.FIREBALL) {
-            this.style.backgroundColor = colors[count]
+            this.style.backgroundColor = colors[count];
             CurrentColor.FIREBALL = colors[count];
+            Util.debounce(updateSimilars, Const.TIMEOUT.DEBOUNCE);
         } else {
             this.style.fill = colors[count];
             if (colors === Const.COLOR.ROBE) {

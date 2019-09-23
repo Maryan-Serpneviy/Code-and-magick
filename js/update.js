@@ -14,6 +14,9 @@ const getRank = wizard => {
     if (wizard.colorEyes === CurrentColor.EYES) {
         rank += 1;
     }
+    if (wizard.colorFireball === CurrentColor.FIREBALL) {
+        rank += 1;
+    }
     return rank;
 };
 
