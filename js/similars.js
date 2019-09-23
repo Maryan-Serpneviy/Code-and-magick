@@ -1,18 +1,16 @@
 import AJAX from './ajax.js';
 import Const from './constants.js';
-import Util from './utils.js';
 import render from './render.js';
 
 const userDialog = document.querySelector('.overlay');
 const similarListElement = userDialog.querySelector('.setup-similar-list');
+const fragment = document.createDocumentFragment();
 
 let wizards = [];
 
 const renderSimilars = data => {
     wizards = data;
-    
-    const randomWizards = Util.getRandomArrayElements(data, Const.SIMILARS);
-    const fragment = document.createDocumentFragment();
+    const randomWizards = data.getRandomElements(Const.SIMILARS);
     randomWizards.forEach(elem => {
         fragment.appendChild(render(elem));
     })

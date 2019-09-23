@@ -1,5 +1,3 @@
-import Util from './utils.js';
-
 const CX1 = 200;
 const CX2 = 350;
 const CX3 = 500;
@@ -35,7 +33,7 @@ const renderStatistics = (ctx, players, times) => {
     ctx.font = '16px PT Mono';
     ctx.fillText ('Congratulations, you won!', 175, 55);
     ctx.fillText ('Results:', 450, 55);
-    const maxTime = Math.floor (Util.getMaxElement(times));
+    const maxTime = Math.floor (times.getMaxElement());
     let winCoef;
     for (let i = 0; i < players.length; i++) {
         // different saturations of blue for other players
