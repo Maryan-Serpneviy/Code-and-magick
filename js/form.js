@@ -9,7 +9,7 @@ const successHandler = () => {
 };
 
 userForm.addEventListener ('submit', evt => {
-    AJAX.save (new FormData(userForm), successHandler, AJAX.errorHandler);
+    AJAX.save (new FormData(userForm), successHandler, AJAX.statusHandler, 'uploaded');
     userDialog.classList.add('hidden');
     evt.preventDefault();
 });
