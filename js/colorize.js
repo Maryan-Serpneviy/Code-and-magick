@@ -33,12 +33,12 @@ const colorize = colors => {
     }
 };
 
-const changeRobeColor = colorize (Const.COLOR.ROBE);
-const changeEyesColor = colorize (Const.COLOR.EYES);
-const changeFireballColor = colorize (Const.COLOR.FIREBALL);
+const changeRobeColor = colorize(Const.COLOR.ROBE);
+const changeEyesColor = colorize(Const.COLOR.EYES);
+const changeFireballColor = colorize(Const.COLOR.FIREBALL);
 
-wizardRobe.addEventListener ('click', changeRobeColor);
-wizardEyes.addEventListener ('click', changeEyesColor);
-fireball.addEventListener ('click', changeFireballColor);
+wizardRobe.addEventListener('click', changeRobeColor);
+wizardEyes.addEventListener('click', changeEyesColor);
+fireball.addEventListener('click', changeFireballColor);
 
 export { CurrentColor };

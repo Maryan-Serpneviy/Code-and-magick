@@ -1,7 +1,7 @@
 const setup = document.querySelector('.overlay');
 const dialogHandler = setup.querySelector('input[type=file]');
 
-dialogHandler.addEventListener ('mousedown', evt => {
+dialogHandler.addEventListener('mousedown', evt => {
     evt.preventDefault();
 
     let dragged = false;
@@ -32,17 +32,17 @@ dialogHandler.addEventListener ('mousedown', evt => {
     const onMouseUp = upEvt => {
         upEvt.preventDefault();
 
-        document.removeEventListener ('mousemove', onMouseMove);
-        document.removeEventListener ('mouseup', onMouseUp);
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
             
         if (dragged) {
             const onClickPreventDefault = evt => {
                 evt.preventDefault();
-                dialogHandler.removeEventListener ('click', onClickPreventDefault);
+                dialogHandler.removeEventListener('click', onClickPreventDefault);
             };
-            dialogHandler.addEventListener ('click', onClickPreventDefault);
+            dialogHandler.addEventListener('click', onClickPreventDefault);
         }
     };
-    document.addEventListener ('mousemove', onMouseMove);
-    document.addEventListener ('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
 });
