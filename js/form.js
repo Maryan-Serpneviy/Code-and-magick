@@ -8,7 +8,7 @@ const successHandler = () => {
     userForm.reset();
 };
 
-userForm.addEventListener ('submit', evt => {
+userForm.addEventListener('submit', evt => {
     AJAX.save (new FormData(userForm), successHandler, AJAX.statusHandler, 'uploaded');
     userDialog.classList.add('hidden');
     evt.preventDefault();
