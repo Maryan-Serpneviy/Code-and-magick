@@ -4,7 +4,7 @@ let draggedItem = null;
 shopElement.addEventListener('dragstart', evt => {
     if (evt.target.tagName.toLowerCase() === 'img') {
     draggedItem = evt.target;
-    evt.dataTransfer.setData ('text', evt.target.alt);
+    evt.dataTransfer.setData('text', evt.target.alt);
     }
     return false;
 });

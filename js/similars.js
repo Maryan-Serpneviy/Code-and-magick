@@ -18,6 +18,6 @@ const renderSimilars = data => {
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
 
-AJAX.load (renderSimilars, AJAX.statusHandler, 'downloaded');
+AJAX.load(renderSimilars, AJAX.statusHandler, 'downloaded');
 
 export { wizards };

@@ -29,7 +29,7 @@ const colorize = colors => {
                 CurrentColor.EYES = colors[count];
                 Util.debounce(updateSimilars, Const.TIMEOUT.DEBOUNCE);
             }
-        }  
+        }
     }
 };
 

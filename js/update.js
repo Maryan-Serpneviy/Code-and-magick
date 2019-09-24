@@ -32,7 +32,7 @@ const namesComparator = (left, right) => {
 
 const updateSimilars = () => {
     similarListElement.innerHTML = ''; // clear similars
-    wizards.sort ((left, right) => {
+    wizards.sort((left, right) => {
         let rankDiff = getRank(right) - getRank(left);
         if (rankDiff === 0) {
             rankDiff = namesComparator(left.name, right.name);

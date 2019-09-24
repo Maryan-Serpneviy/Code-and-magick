@@ -34,7 +34,6 @@ dialogHandler.addEventListener('mousedown', evt => {
 
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
-            
         if (dragged) {
             const onClickPreventDefault = evt => {
                 evt.preventDefault();

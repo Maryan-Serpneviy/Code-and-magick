@@ -9,11 +9,11 @@ export default {
     request (onLoad, onError, url, method, status, data) {
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
-        xhr.addEventListener ('load', () => {
+        xhr.addEventListener('load', () => {
             let message = null;
             switch (xhr.status) {
                 case 200:
-                    onLoad (xhr.response);
+                    onLoad(xhr.response);
                     message = `Data ${status}`;
                     break;
                 case 400:
@@ -39,16 +39,16 @@ export default {
                 onError(message);
             }
         });
-        xhr.addEventListener ('error', function() {
-            this.statusHandler ('Connection error');
+        xhr.addEventListener('error', function() {
+            this.statusHandler('Connection error');
         });
-        xhr.addEventListener ('timeout', function() {
-            this.statusHandler (`Request did not manage to fulfill in' ${xhr.timeout / 1000} s`);
+        xhr.addEventListener('timeout', function() {
+            this.statusHandler(`Request did not manage to fulfill in' ${xhr.timeout / 1000} s`);
         });
         xhr.timeout = Const.TIMEOUT.XHR;
 
-        xhr.open (method, url);
-        xhr.send (data);
+        xhr.open(method, url);
+        xhr.send(data);
     },
     load (onLoad, onError, status) {
         this.request(onLoad, onError, Const.API.LOAD, 'GET', status);
@@ -57,15 +57,14 @@ export default {
         this.request(onLoad, onError, Const.API.SAVE, 'POST', status, data);
     },
     statusHandler (status) {
-        console.log(status);
         statusBlock.style = `visibility: visible; background-color: ${statusColor}`;
-        statusMessage.textContent =  `${status}`;
+        statusMessage.textContent = `${status}`;
         statusClose.addEventListener('click', () => {
             statusBlock.style = Const.EFFECT.VANISH;
         });
         if (status.includes('Data')) {
             setTimeout(() => {
-                statusBlock.style = Const.EFFECT.VANISH;            
+                statusBlock.style = Const.EFFECT.VANISH;
             }, Const.TIMEOUT.SUCCESS);
         }
     }

@@ -18,6 +18,6 @@ userNameInput.addEventListener('invalid', () => {
 userNameInput.addEventListener('input', evt => {
     const target = evt.target;
     target.value.length < Const.MIN_NAME_LENGTH ?
-    target.setCustomValidity(`Name must contain at least ${Const.NAME.MIN} characters`) : 
+    target.setCustomValidity(`Name must contain at least ${Const.NAME.MIN} characters`) :
     target.setCustomValidity('');
 });
