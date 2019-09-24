@@ -21,5 +21,9 @@ export default {
         SUCCESS: '#28a745',
         WARNING: '#ffc107',
         DANGER: '#dc3545'
+    },
+    NAME: {
+        MIN: 5,
+        MAX: 20
     }
 };

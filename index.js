@@ -8,7 +8,7 @@ importModule('similars');
 importModule('update');
 importModule('colorize');
 importModule('form');
-importModule('name-validation');
+importModule('validation');
 importModule('dialog');
 importModule('dialog-dnd');
 importModule('artifacts');
