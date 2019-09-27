@@ -12,3 +12,4 @@ importModule('validation');
 importModule('dialog');
 importModule('dialog-dnd');
 importModule('artifacts');
+importModule('avatar');

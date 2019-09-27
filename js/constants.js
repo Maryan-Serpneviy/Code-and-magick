@@ -25,5 +25,6 @@ export default {
     NAME: {
         MIN: 5,
         MAX: 20
-    }
+    },
+    IMAGE_FORMATS: ['gif', 'jpg', 'jpeg', 'png']
 };
