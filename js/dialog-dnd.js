@@ -12,14 +12,17 @@ dialogHandler.addEventListener('mousedown', evt => {
     };
 
     let startCoords = new Coordinate(evt.clientX, evt.clientY);
+    Object.freeze(startCoords);
 
     const onMouseMove = moveEvt => {
         moveEvt.preventDefault();
         dragged = true;
 
         const shift = new Coordinate(startCoords.x - moveEvt.clientX, startCoords.y - moveEvt.clientY);
+        Object.freeze(shift);
 
         startCoords = new Coordinate(moveEvt.clientX, moveEvt.clientY);
+        Object.freeze(startCoords);
 
         setup.style.top = `${setup.offsetTop - shift.y}px`;
         setup.style.left = `${setup.offsetLeft - shift.x}px`;
