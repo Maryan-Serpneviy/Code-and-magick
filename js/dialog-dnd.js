@@ -6,24 +6,20 @@ dialogHandler.addEventListener('mousedown', evt => {
 
     let dragged = false;
 
-    let startCoords = {
-        x: evt.clientX,
-        y: evt.clientY
+    const Coordinate = function(x, y) {
+        this.x = x;
+        this.y = y;
     };
+
+    let startCoords = new Coordinate(evt.clientX, evt.clientY);
 
     const onMouseMove = moveEvt => {
         moveEvt.preventDefault();
         dragged = true;
 
-        const shift = {
-            x: startCoords.x - moveEvt.clientX,
-            y: startCoords.y - moveEvt.clientY
-        };
+        const shift = new Coordinate(startCoords.x - moveEvt.clientX, startCoords.y - moveEvt.clientY);
 
-        startCoords = {
-            x: moveEvt.clientX,
-            y: moveEvt.clientY
-        };
+        startCoords = new Coordinate(moveEvt.clientX, moveEvt.clientY);
 
         setup.style.top = `${setup.offsetTop - shift.y}px`;
         setup.style.left = `${setup.offsetLeft - shift.x}px`;
