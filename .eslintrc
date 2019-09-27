@@ -35,7 +35,7 @@
 			"newIsCap": true,
 			"newIsCapExceptions": [],
 			"capIsNew": false,
-			"capIsNewExceptions": ["Immutable.Map", "Immutable.Set", "Immutable.List"],
+			"capIsNewExceptions": ["Immutable.Map", "Immutable.Set", "Immutable.List"]
 		}],
 		"new-parens": "error",
 		"no-caller": "error",
@@ -73,7 +73,7 @@
 		"no-unneeded-ternary": "error",
 		"no-unreachable": "error",
 		"no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }],
-		"no-use-before-define": ["warn", { "functions": false, "classes": true, "variables": true }],
+		"no-use-before-define": ["warn", { "functions": false, "classes": true, "variables": false }],
 		"no-useless-computed-key": "error",
 		"no-useless-constructor": "error",
 		"no-var": "warn",
