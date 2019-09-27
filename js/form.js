@@ -8,7 +8,7 @@ const successHandler = () => {
     userForm.reset();
 };
 
-userForm.addEventListener('submit', evt => {
+userForm.addEventListener('submit', function(evt) {
     evt.preventDefault();
-    AJAX.save(new FormData(userForm), successHandler, AJAX.statusHandler, 'uploaded');
+    AJAX.save(new FormData(this), successHandler, AJAX.statusHandler, 'uploaded');
 });

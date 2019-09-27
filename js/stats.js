@@ -26,7 +26,7 @@ const renderCloud = (ctx, x1, x2, x3, y, r, color) => {
     //ctx.stroke();
 };
 
-const renderStatistics = (ctx, players, times) => {
+export default (ctx, players, times) => {
     renderCloud(ctx, CX1 + GAP, CX2 + GAP, CX3 + GAP, CY + GAP, CR, 'rgba(0, 0, 0, 0.3)');
     renderCloud(ctx, CX1, CX2, CX3, CY, CR, 'white');
     ctx.fillStyle = '#000';
@@ -50,13 +50,9 @@ const renderStatistics = (ctx, players, times) => {
         ctx.fillText(Math.floor(times[i]), STAT_X + NAME_GAP * i, STAT_Y + (BAR_HEIGHT - formula));
         ctx.fillText(players[i], NAME_X + NAME_GAP * i, NAME_Y);
         // your color is red, other players' color is constiable
-        if (players[i] === 'Вы') {
-            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-        } else {
-            ctx.fillStyle = colorRB;
-        }
+        players[i] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' : ctx.fillStyle = colorRB;
         ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y + (BAR_HEIGHT - formula), BAR_WIDTH, formula);
     }
 };
 
-export { renderStatistics };
+//export { renderStatistics };
