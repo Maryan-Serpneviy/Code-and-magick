@@ -6,7 +6,7 @@ const statusClose = document.querySelector('.ajax-status__close');
 let statusColor = null;
 
 export default {
-    request (onLoad, onError, url, method, status, data) {
+    request(onLoad, onError, url, method, status, data) {
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
@@ -32,17 +32,17 @@ export default {
                     }, Const.TIMEOUT.RELOAD);
                     break;
                 default:
-                    message = `Response status: ${xhr.status} ${xhr.statusText}`
+                    message = `Response status: ${xhr.status} ${xhr.statusText}`;
             }
             xhr.status === 200 ? statusColor = Const.COLOR.SUCCESS : statusColor = Const.COLOR.DANGER;
             if (message) {
                 onError(message);
             }
         });
-        xhr.addEventListener('error', function() {
+        xhr.addEventListener('error', () => {
             this.statusHandler('Connection error');
         });
-        xhr.addEventListener('timeout', function() {
+        xhr.addEventListener('timeout', () => {
             this.statusHandler(`Request did not manage to fulfill in' ${xhr.timeout / 1000} s`);
         });
         xhr.timeout = Const.TIMEOUT.XHR;
@@ -50,13 +50,13 @@ export default {
         xhr.open(method, url);
         xhr.send(data);
     },
-    load (onLoad, onError, status) {
+    load(onLoad, onError, status) {
         this.request(onLoad, onError, Const.API.LOAD, 'GET', status);
     },
-    save (data, onLoad, onError, status) {
+    save(data, onLoad, onError, status) {
         this.request(onLoad, onError, Const.API.SAVE, 'POST', status, data);
     },
-    statusHandler (status) {
+    statusHandler(status) {
         statusBlock.style = `visibility: visible; background-color: ${statusColor}`;
         statusMessage.textContent = `${status}`;
         statusClose.addEventListener('click', () => {

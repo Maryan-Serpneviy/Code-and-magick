@@ -30,7 +30,7 @@ const colorize = colors => {
                 Util.debounce(updateSimilars, Const.TIMEOUT.DEBOUNCE);
             }
         }
-    }
+    };
 };
 
 const changeRobeColor = colorize(Const.COLOR.ROBE);

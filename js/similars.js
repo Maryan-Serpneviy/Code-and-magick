@@ -13,7 +13,7 @@ const renderSimilars = data => {
     const randomWizards = data.getRandomElements(Const.SIMILARS);
     randomWizards.forEach(elem => {
         fragment.appendChild(render(elem));
-    })
+    });
     similarListElement.appendChild(fragment);
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
