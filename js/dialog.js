@@ -20,15 +20,15 @@ const onCrossEntPress = evt => {
     }
 };
 
-const openPopup = () => {
+function openPopup() {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
-};
+}
 
-const closePopup = () => {
+function closePopup() {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
-};
+}
 
 setupOpen.addEventListener('click', openPopup);
 setupOpen.addEventListener('keydown', onAvatarEntPress);
