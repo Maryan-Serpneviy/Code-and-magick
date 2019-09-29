@@ -49,5 +49,3 @@ const updateSimilars = () => {
 Marijuan.onChange = () => {
     Util.debounce(updateSimilars, Const.TIMEOUT.DEBOUNCE);
 };
-
-export { updateSimilars };

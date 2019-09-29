@@ -1,4 +1,4 @@
-import { Wizard } from './wizard.js';
+import Wizard from './wizard.js';
 
 const wizardRobe = document.querySelector('.setup-wizard .wizard-coat');
 const wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');

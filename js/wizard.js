@@ -1,48 +1,47 @@
 import Const from './constants.js';
 
-export const Wizard = function(data) {
-    this.name = data.name;
-    this.robeColor = data.colorCoat;
-    this.eyesColor = data.colorEyes;
-    this.fireballColor = data.colorFireball;
-    this.artifacts = data.artifacts;
-};
+let counter = 0;
 
-Wizard.prototype = {
-    counter: 0,
-    setName(name) {
-        if (!name) {
+export default class Wizard {
+    constructor(data) {
+        this.name = data.name;
+        this.robeColor = data.colorCoat;
+        this.eyesColor = data.colorEyes;
+        this.fireballColor = data.colorFireball;
+        this.artifacts = data.artifacts;
+    }
+    set name(value) {
+        if (!value) {
             throw new Error('Name is not specified');
         }
-        if (name.length > 30) {
-            throw new Error(`Invalid wizard's name value ${name}`);
+        if (value.length > 30) {
+            throw new Error(`Invalid wizard's name value ${value}`);
         }
-        this.name = name;
+        this.newName = value;
         this.onChange(this);
-        return name;
-    },
-    getName() {
-        return this.name;
-    },
+    }
+    get name() {
+        return this.newName;
+    }
     changeRobeColor() {
-        this.counter === Const.COLOR.ROBE.length - 1 ? this.counter = 0 : this.counter++;
-        this.robeColor = Const.COLOR.ROBE[this.counter];
+        counter === Const.COLOR.ROBE.length - 1 ? counter = 0 : counter++;
+        this.robeColor = Const.COLOR.ROBE[counter];
         this.onChange(this);
-        return Const.COLOR.ROBE[this.counter];
-    },
+        return Const.COLOR.ROBE[counter];
+    }
     changeEyesColor() {
-        this.counter === Const.COLOR.EYES.length - 1 ? this.counter = 0 : this.counter++;
-        this.eyesColor = Const.COLOR.EYES[this.counter];
+        counter === Const.COLOR.EYES.length - 1 ? counter = 0 : counter++;
+        this.eyesColor = Const.COLOR.EYES[counter];
         this.onChange(this);
-        return Const.COLOR.EYES[this.counter];
-    },
+        return Const.COLOR.EYES[counter];
+    }
     changeFireballColor() {
-        this.counter === Const.COLOR.FIREBALL.length - 1 ? this.counter = 0 : this.counter++;
-        this.fireballColor = Const.COLOR.FIREBALL[this.counter];
+        counter === Const.COLOR.FIREBALL.length - 1 ? counter = 0 : counter++;
+        this.fireballColor = Const.COLOR.FIREBALL[counter];
         this.onChange(this);
-        return Const.COLOR.FIREBALL[this.counter];
-    },
+        return Const.COLOR.FIREBALL[counter];
+    }
     onChange(wizard) {
         return wizard;
     }
-};
+}

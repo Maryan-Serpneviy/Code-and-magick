@@ -1,7 +1,7 @@
-import AJAX from './ajax.js';
 import Const from './constants.js';
+import AJAX from './ajax.js';
+import Wizard from './wizard.js';
 import render from './render.js';
-import { Wizard } from './wizard.js';
 
 const userDialog = document.querySelector('.overlay');
 const similarListElement = userDialog.querySelector('.setup-similar-list');
