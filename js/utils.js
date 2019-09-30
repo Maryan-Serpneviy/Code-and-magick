@@ -8,7 +8,13 @@ export default {
                 cb();
             }, ms);
         };
-    })()
+    })(),
+    svg2base64: svg => {
+        const DATA_URI_PREFIX = 'data:image/svg+xml;charset=utf-8;base64,';
+        const xml = new XMLSerializer().serializeToString(svg); // convert element to text
+        const svg64 = window.btoa(xml); // encode element in base64 form
+        return `${DATA_URI_PREFIX}${svg64}`; // add heading
+    }
 };
 
 Array.prototype.getMaxElement = function() {
