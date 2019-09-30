@@ -1,7 +1,5 @@
 import Const from './constants.js';
 
-let counter = 0;
-
 export default class Wizard {
     constructor(data) {
         this.name = data.name;
@@ -9,6 +7,7 @@ export default class Wizard {
         this.eyesColor = data.colorEyes;
         this.fireballColor = data.colorFireball;
         this.artifacts = data.artifacts;
+        this.counter = 0;
     }
     set name(value) {
         if (!value) {
@@ -24,22 +23,22 @@ export default class Wizard {
         return this.newName;
     }
     changeRobeColor() {
-        counter === Const.COLOR.ROBE.length - 1 ? counter = 0 : counter++;
-        this.robeColor = Const.COLOR.ROBE[counter];
+        this.counter === Const.COLOR.ROBE.length - 1 ? this.counter = 0 : this.counter++;
+        this.robeColor = Const.COLOR.ROBE[this.counter];
         this.onChange(this);
-        return Const.COLOR.ROBE[counter];
+        return Const.COLOR.ROBE[this.counter];
     }
     changeEyesColor() {
-        counter === Const.COLOR.EYES.length - 1 ? counter = 0 : counter++;
-        this.eyesColor = Const.COLOR.EYES[counter];
+        this.counter === Const.COLOR.EYES.length - 1 ? this.counter = 0 : this.counter++;
+        this.eyesColor = Const.COLOR.EYES[this.counter];
         this.onChange(this);
-        return Const.COLOR.EYES[counter];
+        return Const.COLOR.EYES[this.counter];
     }
     changeFireballColor() {
-        counter === Const.COLOR.FIREBALL.length - 1 ? counter = 0 : counter++;
-        this.fireballColor = Const.COLOR.FIREBALL[counter];
+        this.counter === Const.COLOR.FIREBALL.length - 1 ? this.counter = 0 : this.counter++;
+        this.fireballColor = Const.COLOR.FIREBALL[this.counter];
         this.onChange(this);
-        return Const.COLOR.FIREBALL[counter];
+        return Const.COLOR.FIREBALL[this.counter];
     }
     onChange(wizard) {
         return wizard;
