@@ -1,4 +1,4 @@
-import { renderStatistics } from './stats.js';
+import renderStatistics from './stats.js';
 
 window.GameConstants = {
   Fireball: {

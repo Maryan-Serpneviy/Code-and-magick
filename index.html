@@ -26,19 +26,21 @@
   <script type="module" src="js/update.js"></script>
   <script type="module" src="js/colorize.js"></script>
   <script type="module" src="js/form.js"></script>
-  <script type="module" src="js/name-validation.js"></script>
+  <script type="module" src="js/validation.js"></script>
   <script type="module" src="js/dialog.js"></script>
   <script type="module" src="js/dialog-dnd.js"></script>
   <script type="module" src="js/artifacts.js"></script>
+  <script type="module" src="js/avatar.js"></script>
+  <script type="module" src="js/wizard.js"></script>
   -->
   <script src="index.js"></script>
 </head>
 <body>
 
 <header>
-  <div class="download-error">
-    <div class="download-error__message">Error message</div>
-    <div class="download-error__close">
+  <div class="ajax-status">
+    <div class="ajax-status__message">Message</div>
+    <div class="ajax-status__close">
       +
     </div>
   </div>
@@ -113,8 +115,9 @@
         </div>
         <label>
           <input type="text" name="username"
-                 maxlength="25" required
-                 class="setup-user-name" value="Синий Пендальф"/>
+                minlength="5"
+                maxlength="20" required
+                class="setup-user-name" value="Синий Пендальф"/>
         </label>
       </div>
 
@@ -182,12 +185,12 @@
     <div class="setup-footer">
       <div class="setup-similar hidden">
 
-        <h4 class="setup-similar-title">Похожие персонажи</h4>
+        <h4 class="setup-similar-title">Similar characters</h4>
 
         <div class="setup-similar-list"><!--Список похожих персонажей--></div>
       </div>
 
-      <button class="button setup-submit">Сохранить</button>
+      <button class="button setup-submit">Save changes</button>
     </div>
   </form>
 </div>
